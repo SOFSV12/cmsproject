@@ -37,7 +37,7 @@ if(isset($_POST['login'])){
 
    if(password_verify($password,$db_user_password)){
 
-      header("Location: ../admin");
+      header("Location: ../admin/index.php");
 
    //creating a session 
    $_SESSION['username'] = $db_username;
