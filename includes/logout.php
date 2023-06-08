@@ -1,7 +1,9 @@
-<?php include "db.php"?>
-<?php session_start() ?>
-
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+include "db.php";
+session_start(); 
 
 header("Location: ../index.php");
 

@@ -22,7 +22,7 @@
             if(isset($_POST['update_post'])){
 
                 $post_title = mysqli_real_escape_string($connection,$_POST['title']);
-                $post_author = mysqli_real_escape_string($connection,$_POST['post_user']);
+                $post_user = mysqli_real_escape_string($connection,$_POST['post_user']);
                 $post_category_id = mysqli_real_escape_string($connection,$_POST['post_category']);
                 $post_status = mysqli_real_escape_string($connection,$_POST['post_status']);
 
@@ -60,7 +60,7 @@
                 $query .= "post_title = '{$post_title}', ";
                 $query .= "post_category_id = '{$post_category_id}', ";
                 $query .= "post_date = now(), ";
-                $query .= "post_author = '{$post_author}', ";
+                $query .= "post_user = '{$post_user}', ";
                 $query .= "post_status = '{$post_status}', ";
                 $query .= "post_tags = '{$post_tags}', ";
                 $query .= "post_content = '{$post_content}', ";
