@@ -27,13 +27,3 @@ $('#load-screen').delay(500).fadeOut(400, function(){
 });
 
 
-function loadUsersOnline(){
-  $.get("functions.php?onlineusers=result", function(data){
-    // console.log("data:" + data);
-  $(".usersonline").text(data);
-  });
-}
-
-setInterval(function(){
-  loadUsersOnline();
-}, 1000);

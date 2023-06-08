@@ -15,6 +15,7 @@ if(isset($_POST['checkBoxArray'])){
         $update_post = mysqli_query($connection, $query);
         //error handling 
         confirmQuery($update_post);
+        header("Location: ./posts.php");
         break;
 
         case 'draft':
@@ -24,6 +25,7 @@ if(isset($_POST['checkBoxArray'])){
         $update_post = mysqli_query($connection, $query);
         //error handling 
         confirmQuery($update_post);
+        header("Location: ./posts.php");
         break;
 
         case 'delete':
@@ -33,6 +35,7 @@ if(isset($_POST['checkBoxArray'])){
         $delete_post = mysqli_query($connection, $query);
         //error handling 
         confirmQuery($delete_post);
+        header("Location: ./posts.php");
         break;
 
 
