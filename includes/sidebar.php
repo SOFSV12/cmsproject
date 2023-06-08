@@ -29,7 +29,7 @@
         <input name="username" type="text" class="form-control" placeholder="Enter username">
     </div>
     <div class="input-group">
-        <input name="password" type="password" class="form-control" placeholder="Enter password">
+        <input name="password" autocomplete="off" type="password" class="form-control" placeholder="Enter password">
         <span class="input-group-btn">
             <button class="btn btn-primary" type="submit" name="login">Submit</button>
         </span>
