@@ -1,42 +1,6 @@
 <?php 
-
-if(isset($_POST['create_user'])){
-   $user_firstname = mysqli_real_escape_string($connection,$_POST['user_firstname']);
-  $user_lastname = mysqli_real_escape_string($connection,$_POST['user_lastname']);
-  $user_role = mysqli_real_escape_string($connection,$_POST['user_role']);
-  $username = mysqli_real_escape_string($connection,$_POST['username']);
-  $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
-  $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
-
-  $crypt_md5_fmt = "$1$";
-  $salt = "random_salt$";
-  $hashF_and_salt = $crypt_md5_fmt . $salt;
-  //hashing password
-  $hashed_password = crypt($user_password,$hashF_and_salt);
-
-
-  //sql query
-  $query = "INSERT INTO users (user_firstname,user_lastname,user_role,username,user_email,user_password) ";
-
-  $query .= 
-  "VALUES ('{$user_firstname}', '{$user_lastname}', '{$user_role}','{$username}', '{$user_email}',
-  '{$hashed_password}' )";
-  
-  //execute query on db
-  
-  $create_user_query = mysqli_query($connection, $query);
-  
-  
-  if($create_user_query){
-      echo "SUCCESFUL";
-     }else{
-       die('QUERY FAILED' . mysqli_error($connection));
-     }
-
-    echo '<br><a href="users.php">View Users</a><br><br>';
-
-  
-}
+//add user operation
+addUser();
 
 ?>
 
@@ -55,7 +19,7 @@ if(isset($_POST['create_user'])){
 
 <div class="form-group">
 <select name="user_role" id="">
-    <option value="">Select option</option>
+    <option value="">Select Role</option>
     <option value="admin">Admin</option>
     <option value="subscriber">Subscriber</option>>
 </select>

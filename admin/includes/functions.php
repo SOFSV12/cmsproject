@@ -134,4 +134,176 @@ function escape($string){
     mysqli_real_escape_string($connection,trim($string));
 }
 
+//8. Delete Users 
+function deleteUsers(){
+    global $connection;
+    if(isset($_GET['delete'])){
+
+        if($_SESSION['user_role'] == "admin"){
+            $user_id = mysqli_real_escape_string($connection,$_GET['delete']);
+            //sql query
+            $query = "DELETE FROM users WHERE user_id = {$user_id} ";
+            //send query to database
+            $delete_user = mysqli_query($connection,$query);
+            //refreshes the page after deleting has been completed
+            header("Location: users.php");
+             //error handling for sent in query
+            if ($delete_user === TRUE) {
+                echo "Record deleted successfully";
+            } else {
+                die('QUERY FAILED' . mysqli_error($connection));
+            }
+        }
+
+
+}
+}
+
+//9. 
+function changeToAdmin(){
+    global $connection;
+    if(isset($_GET['change_to_admin'])){
+        $the_user_id = $_GET['change_to_admin'];
+        $admin = 'admin';
+         //sql query
+         $query = "UPDATE users SET user_role = '{$admin}' WHERE user_id = {$the_user_id} ";
+         //send query to database
+         $change_to_admin_query = mysqli_query($connection,$query);
+         //refreshes the page after deleting has been completed
+         header("Location: users.php");
+          //error handling for sent in query
+         if ($change_to_admin_query === TRUE) {
+             echo "Role Reassignment Succesful";
+         } else {
+             die('QUERY FAILED' . mysqli_error($connection));
+         }
+    }
+}
+
+//10. 
+function changeToSubscriber(){
+    global $connection;
+    if(isset($_GET['change_to_sub'])){
+        $the_user_id = $_GET['change_to_sub'];
+        $sub = 'subscriber';
+         //sql query
+         $query = "UPDATE users SET user_role = '{$sub}' WHERE user_id = {$the_user_id} ";
+         //send query to database
+         $change_to_sub_query = mysqli_query($connection,$query);
+         //refreshes the page after deleting has been completed
+         header("Location: users.php");
+          //error handling for sent in query
+         if ($change_to_sub_query === TRUE) {
+             echo "Role Reassignment Succesful";
+         } else {
+             die('QUERY FAILED' . mysqli_error($connection));
+         }
+    }
+}
+
+//11. Add user operation 
+function addUser() {
+
+    global $connection;
+
+    
+if(isset($_POST['create_user'])){
+    $user_firstname = mysqli_real_escape_string($connection,$_POST['user_firstname']);
+   $user_lastname = mysqli_real_escape_string($connection,$_POST['user_lastname']);
+   $user_role = mysqli_real_escape_string($connection,$_POST['user_role']);
+   $username = mysqli_real_escape_string($connection,$_POST['username']);
+   $user_email = mysqli_real_escape_string($connection,$_POST['user_email']);
+   $user_password = mysqli_real_escape_string($connection,$_POST['user_password']);
+ 
+   $crypt_md5_fmt = "$1$";
+   $salt = "random_salt$";
+   $hashF_and_salt = $crypt_md5_fmt . $salt;
+   //hashing password
+   $hashed_password = crypt($user_password,$hashF_and_salt);
+ 
+ 
+   //sql query
+   $query = "INSERT INTO users (user_firstname,user_lastname,user_role,username,user_email,user_password) ";
+ 
+   $query .= 
+   "VALUES ('{$user_firstname}', '{$user_lastname}', '{$user_role}','{$username}', '{$user_email}',
+   '{$hashed_password}' )";
+   
+   //execute query on db
+   
+   $create_user_query = mysqli_query($connection, $query);
+   
+   
+   if($create_user_query){
+       echo "SUCCESFUL";
+      }else{
+        die('QUERY FAILED' . mysqli_error($connection));
+      }
+ 
+     echo '<br><a href="users.php">View Users</a><br><br>';
+ 
+   
+ }
+}
+//12. delete comment 
+function deleteComment(){
+   global $connection;
+   if(isset($_GET['delete'])){
+    $comment_id = $_GET['delete'];
+     //sql query
+     $query = "DELETE FROM comments WHERE comment_id = {$comment_id} ";
+     //send query to database
+     $delete_category = mysqli_query($connection,$query);
+     //refreshes the page after deleting has been completed
+     header("Location: comments.php");
+      //error handling for sent in query
+     if ($delete_category === TRUE) {
+         echo "Record deleted successfully";
+     } else {
+         die('QUERY FAILED' . mysqli_error($connection));
+     }
+}
+}
+
+//13. delete comment 
+function approveComment(){
+   global $connection;
+   if(isset($_GET['unapprove'])){
+    $the_comment_id = $_GET['unapprove'];
+    $unapprove = 'unapproved';
+     //sql query
+     $query = "UPDATE comments SET comment_status = '{$unapprove}' WHERE comment_id = {$the_comment_id} ";
+     //send query to database
+     $unapprove_comment_query = mysqli_query($connection,$query);
+     //refreshes the page after deleting has been completed
+     header("Location: comments.php");
+      //error handling for sent in query
+     if ($unapprove_comment_query === TRUE) {
+         echo "Record deleted successfully";
+     } else {
+         die('QUERY FAILED' . mysqli_error($connection));
+     }
+}
+}
+
+//14. delete comment 
+function unapproveComment(){
+   global $connection;
+   if(isset($_GET['approve'])){
+    $the_comment_id = $_GET['approve'];
+    $approve = 'approved';
+     //sql query
+     $query = "UPDATE comments SET comment_status = '{$approve}' WHERE comment_id = {$the_comment_id} ";
+     //send query to database
+     $approve_comment_query = mysqli_query($connection,$query);
+     //refreshes the page after deleting has been completed
+     header("Location: comments.php");
+      //error handling for sent in query
+     if ($approve_comment_query === TRUE) {
+         echo "Record deleted successfully";
+     } else {
+         die('QUERY FAILED' . mysqli_error($connection));
+     }
+}
+}
 ?>
