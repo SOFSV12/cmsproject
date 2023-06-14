@@ -1,6 +1,6 @@
 <?php 
 if(isset($_GET['user_id'])){
-$the_user_id = escape($_GET['user_id']);
+$the_user_id = mysqli_real_escape_string($connection,$_GET['user_id']);
 //select all posts 
 $query = "SELECT * FROM users WHERE user_id = {$the_user_id} ";
 //send query to database
@@ -48,6 +48,8 @@ if(isset($_POST['edit_user'])){
 
     //executing query 
     $edit_user_query = mysqli_query($connection, $query);
+
+    header("Location: ./users.php");
 
     //error handling 
     confirmQuery($edit_user_query);
