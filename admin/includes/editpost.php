@@ -101,7 +101,16 @@
     </div>
 
     <select name="post_category" id="post_category">
-
+    <option value="<?php echo $post_category_id; ?>"><?php 
+    
+    $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id} ";
+    $select_category = mysqli_query($connection,$query);
+    $row = mysqli_fetch_assoc($select_category);
+    $category_name = $row['cat_title'];
+    
+    echo "Current category is" . " " . $category_name;
+    ?></option>
+ 
 
     <?php
     
@@ -130,7 +139,7 @@
         <label for="post_user">Post Author</label>
     </div>
     <select name="post_user" id="post_user">
-    <option value="<?php echo $post_user; ?>"><?php echo"Author is" . " " . $post_user?></option>
+    <option value="<?php echo $post_user; ?>"><?php echo"Current author is" . " " . $post_user?></option>
 
 
 
