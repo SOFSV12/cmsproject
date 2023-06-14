@@ -65,55 +65,11 @@
 
 
 // delete comment operation
-           if(isset($_GET['delete'])){
-    $comment_id = $_GET['delete'];
-     //sql query
-     $query = "DELETE FROM comments WHERE comment_id = {$comment_id} ";
-     //send query to database
-     $delete_category = mysqli_query($connection,$query);
-     //refreshes the page after deleting has been completed
-     header("Location: comments.php");
-      //error handling for sent in query
-     if ($delete_category === TRUE) {
-         echo "Record deleted successfully";
-     } else {
-         die('QUERY FAILED' . mysqli_error($connection));
-     }
-}
+deleteComment();
 // unapprove comment operation
-           if(isset($_GET['unapprove'])){
-    $the_comment_id = $_GET['unapprove'];
-    $unapprove = 'unapproved';
-     //sql query
-     $query = "UPDATE comments SET comment_status = '{$unapprove}' WHERE comment_id = {$the_comment_id} ";
-     //send query to database
-     $unapprove_comment_query = mysqli_query($connection,$query);
-     //refreshes the page after deleting has been completed
-     header("Location: comments.php");
-      //error handling for sent in query
-     if ($unapprove_comment_query === TRUE) {
-         echo "Record deleted successfully";
-     } else {
-         die('QUERY FAILED' . mysqli_error($connection));
-     }
-}
+approveComment();
 // approve comment operation
-           if(isset($_GET['approve'])){
-    $the_comment_id = $_GET['approve'];
-    $approve = 'approved';
-     //sql query
-     $query = "UPDATE comments SET comment_status = '{$approve}' WHERE comment_id = {$the_comment_id} ";
-     //send query to database
-     $approve_comment_query = mysqli_query($connection,$query);
-     //refreshes the page after deleting has been completed
-     header("Location: comments.php");
-      //error handling for sent in query
-     if ($approve_comment_query === TRUE) {
-         echo "Record deleted successfully";
-     } else {
-         die('QUERY FAILED' . mysqli_error($connection));
-     }
-}
+unapproveComment();
            ?>
         </tr>
     </tbody>

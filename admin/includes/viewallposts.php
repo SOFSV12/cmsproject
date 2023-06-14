@@ -190,16 +190,18 @@ if(isset($_POST['checkBoxArray'])){
         }
             
            ?>
+           
            <?php
+           //delete operation
            if(isset($_GET['delete'])){
-    $post_id = escape($_GET['delete']);
+    $post_id = mysqli_real_escape_string($connection, $_GET['delete']);
      //sql query
      $query = "DELETE FROM posts WHERE post_id = {$post_id} ";
      //send query to database
      $delete_category = mysqli_query($connection,$query);
      //refreshes the page after deleting has been completed
+     //error handling for sent in query
      header("Location: posts.php");
-      //error handling for sent in query
      if ($delete_category === TRUE) {
          echo "Record deleted successfully";
      } else {
@@ -209,8 +211,9 @@ if(isset($_POST['checkBoxArray'])){
            ?>
 
            <?php
+           //reset view count
            if(isset($_GET['null_view'])){
-    $post_id = escape($_GET['null_view']);
+    $post_id = mysqli_real_escape_string($connection, $_GET['null_view']);
      //sql query
      $num = 0;
      $query = "UPDATE posts SET post_views_count = {$num} WHERE post_id = {$post_id} ";
